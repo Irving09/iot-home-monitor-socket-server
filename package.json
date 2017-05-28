@@ -1,0 +1,16 @@
+{
+  "name": "iot-home-monitor-socket-server",
+  "version": "1.0.0",
+  "description": "Socket server for communications between raspberry pi and UI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "irving09",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "socket.io": "^2.0.1",
+    "socket.io-client": "latest"
+  }
+}
