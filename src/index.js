@@ -15,22 +15,22 @@ app.get('/', (req, res) => {
   });
 });
 
-io.on('connection', (socket) => {
+io.on('connection', function(socket) {
   console.log('a user connected');
 
-  socket.on(MESSAGE_TOPIC, (imageStream) => {
+  socket.on(MESSAGE_TOPIC, function(imageStream) {
     console.log('=================');
     console.log(`received message:`);
     console.log('=================');
 
     // TODO Emit imageStream to UI clients
     // Doesnt work
-    console.log(socket.emit);
+    console.log('socket.connected', socket.connected);
     socket.emit(UI_TOPIC, 'hello world');
   });
 
   // It works here
-  // socket.emit(UI_TOPIC, 'hello world');
+  socket.emit(UI_TOPIC, '====> hello world outside callback');
 });
 
 http.listen(3000, () => console.log('listening on *:3000'));
