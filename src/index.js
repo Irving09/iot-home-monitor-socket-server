@@ -9,8 +9,6 @@ const UI_TOPIC = 'iot-home-intruder-ui';
 
 app.set('view engine', 'pug');
 
-let test;
-
 app.get('/', (req, res) => {
   res.render('index', {
     title: 'IoT Home intruder socket server'
