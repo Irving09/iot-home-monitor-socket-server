@@ -24,13 +24,9 @@ io.on('connection', function(socket) {
     console.log('=================');
 
     // TODO Emit imageStream to UI clients
-    // Doesnt work
-    console.log('socket.connected', socket.connected);
-    socket.emit(UI_TOPIC, 'hello world');
+    socket.broadcast.emit(UI_TOPIC, imageStream);
   });
 
-  // It works here
-  socket.emit(UI_TOPIC, '====> hello world outside callback');
 });
 
 http.listen(3000, () => console.log('listening on *:3000'));
