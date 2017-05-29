@@ -24,8 +24,13 @@ io.on('connection', (socket) => {
     console.log('=================');
 
     // TODO Emit imageStream to UI clients
-    socket.emit(UI_TOPIC, imageStream);
+    // Doesnt work
+    console.log(socket.emit);
+    socket.emit(UI_TOPIC, 'hello world');
   });
+
+  // It works here
+  // socket.emit(UI_TOPIC, 'hello world');
 });
 
 http.listen(3000, () => console.log('listening on *:3000'));
