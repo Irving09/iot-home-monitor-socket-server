@@ -4,6 +4,7 @@
   "description": "Socket server for communications between raspberry pi and UI",
   "main": "index.js",
   "scripts": {
+    "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "irving09",
