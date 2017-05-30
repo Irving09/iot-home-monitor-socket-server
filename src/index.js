@@ -20,6 +20,7 @@ io.on('connection', function(socket) {
 
   socket.on(MESSAGE_TOPIC, function(imageStream) {
     console.log(`received image stream`);
+    console.log(imageStream);
     // TODO Emit imageStream to UI clients
     socket.broadcast.emit(UI_TOPIC, imageStream);
   });
