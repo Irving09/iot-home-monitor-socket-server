@@ -26,7 +26,9 @@ app.put('/stream', function (req, res) {
   console.log('received request to start/stop the stream: ', req.query['start']);
 
   if (connectedToAwsIoT) {
-    Device.publish('start-stream', req.query['start']);
+    Device.publish('start-stream', JSON.stringify({
+      streamEnabled: req.query['start']
+    }));
     res.json({
       message: 'iot-home-monitor streaming started'
     });
@@ -51,7 +53,6 @@ Device.on('connect', (err, data) => {
   console.log('iot-home-monitor successfully connected to AWS IoT Device Gateway');
 
   connectedToAwsIoT = true;
-  // Device.publish('start-stream', startStreaming);
 });
 
 http.listen(3000, () => console.log('listening on *:3000'));
