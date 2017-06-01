@@ -6,7 +6,7 @@ const http        = require('http').Server(app);
 const io          = require('socket.io')(http);
 const iot         = require('aws-iot-device-sdk');
 
-const MESSAGE_TOPIC = 'iot-home-monitor';
+const MESSAGE_TOPIC = 'iot-home-intruder';
 const UI_TOPIC = 'iot-home-intruder-ui';
 const RPI_TOPIC = 'iot-home-intruder-start-stream';
 
