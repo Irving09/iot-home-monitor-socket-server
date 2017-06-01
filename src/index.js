@@ -8,10 +8,9 @@ const iot         = require('aws-iot-device-sdk');
 
 const MESSAGE_TOPIC = 'iot-home-intruder';
 const UI_TOPIC = 'iot-home-intruder-ui';
+const RPI_TOPIC = 'iot-home-intruder-start-stream';
 
-const Device = iot.device(require('./credentials'));
-
-let connectedToAwsIoT = false;
+let Socket;
 
 app.set('view engine', 'pug');
 app.use(cors());
@@ -25,10 +24,9 @@ app.get('/', (req, res) => {
 app.put('/stream', function (req, res) {
   console.log('received request to start/stop the stream: ', req.query['start']);
 
-  if (connectedToAwsIoT) {
-    Device.publish('start-stream', JSON.stringify({
-      streamEnabled: req.query['start']
-    }));
+  if (Socket) {
+    console.log('emitting query to start the stream...');
+    Socket.broadcast.emit(RPI_TOPIC, req.query['start']);
     res.json({
       message: 'iot-home-monitor streaming started'
     });
@@ -42,17 +40,12 @@ app.put('/stream', function (req, res) {
 io.on('connection', function(socket) {
   console.log('a user connected');
 
+  Socket = socket;
+
   socket.on(MESSAGE_TOPIC, function(imageStream) {
     socket.broadcast.emit(UI_TOPIC, imageStream);
   });
 
-});
-
-Device.on('connect', (err, data) => {
-  if (err) throw err;
-  console.log('iot-home-monitor successfully connected to AWS IoT Device Gateway');
-
-  connectedToAwsIoT = true;
 });
 
 http.listen(3000, () => console.log('listening on *:3000'));
