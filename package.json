@@ -10,6 +10,8 @@
   "author": "irving09",
   "license": "ISC",
   "dependencies": {
+    "aws-iot-device-sdk": "^1.0.14",
+    "cors": "^2.8.3",
     "express": "^4.15.3",
     "pug": "^2.0.0-rc.1",
     "socket.io": "^2.0.1",
